@@ -11,7 +11,7 @@ def add_task(task):
     """
     with open(TASK_FILE,"a", encoding="utf-8") as file:
         file.write(task +"\n")
-    
+
     
      
         
@@ -45,12 +45,29 @@ def list_tasks():
     
 
 
+
 def remove_task(index):
-    return
-    
-    
-    
-    return
+    """Function: remove_task
+
+    Input: index - the number of the task to remove from the list
+    Return: nothing
+    """
+    if os.path.exists(TASK_FILE):
+        with open(TASK_FILE, "r", encoding="utf-8") as file:
+            tasks = file.readlines()
+        if 1 <= index <= len(tasks):
+            with open(TASK_FILE, "w", encoding="utf-8") as file:
+                for i, task in enumerate(tasks, start=1):
+                    if i != index:
+                        file.write(task)
+            print(f"Task at index {index} removed.")
+        else:
+            print(f"Invalid task number: {index}. Please enter a number between 1 and {len(tasks)}.")
+    else:
+        print("No tasks found.")
+        
+       
+
 
 def main():
     parser = argparse.ArgumentParser(description="Command-line Todo List")
