@@ -1,3 +1,6 @@
+"""
+This script defines command-line arguements using the argparse module.
+"""
 import argparse
 import os
 
@@ -11,10 +14,6 @@ def add_task(task):
     """
     with open(TASK_FILE,"a", encoding="utf-8") as file:
         file.write(task +"\n")
-
-    
-     
-        
 def list_tasks():
     """
     Lists the tasks in the provided task list with their index.
@@ -23,26 +22,17 @@ def list_tasks():
         list_tasks: A list of strings, where each string represents a task
         
     Returns:
-        str: A formatted string containing the numbered tasks, or an empty string if the todo list is empty.
+        str: A formatted string containing the numbered tasks,or will be empty
     
 """
     with open (TASK_FILE,"r", encoding= "utf-8") as file:
-          tasks = file.readlines()
-   
+        tasks = file.readlines()
     output_string= "Your task list:\n"
     formatted_tasks = []
     for index,task in enumerate(tasks):
         formatted_tasks.append(f"{index + 1}. {task}")
     output_string += "".join(formatted_tasks)
     return output_string.rstrip('\n')
-
-
-
-    
-                
-            
-        
-    
 
 
 
@@ -62,14 +52,13 @@ def remove_task(index):
                         file.write(task)
             print(f"Task at index {index} removed.")
         else:
-            print(f"Invalid task number: {index}. Please enter a number between 1 and {len(tasks)}.")
+            print(f"Invalid task number: {index}.Enter a number between 1")
     else:
         print("No tasks found.")
-        
-       
 
 
 def main():
+    """The main function of the script"""
     parser = argparse.ArgumentParser(description="Command-line Todo List")
     parser.add_argument(
             "-a",
@@ -101,5 +90,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
